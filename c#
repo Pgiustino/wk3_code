@@ -1,0 +1,63 @@
+static void Main(string[] args)
+        {
+            const double marriedRate = .15;
+            const double singleRate = .22;
+            const double widowedRate = .13;
+            const double divorcedRate = .23;
+            Double hourlyRate, hoursWorked, regularPay = 0, grossPay = 0, netPay = 0, overtimePay = 0;
+            string maritalStatus;
+            Label1:
+            Console.WriteLine("What is your hourly pay?");
+            hourlyRate = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("How many hours did you work?");
+            hoursWorked = Convert.ToDouble(Console.ReadLine());
+            if (hoursWorked <= 40)
+            {
+                regularPay = hoursWorked * hourlyRate;
+                grossPay = regularPay;
+            }
+            else if (hoursWorked > 40)
+            {
+                regularPay = 40 * hourlyRate;
+                overtimePay = (hoursWorked - 40) * (hourlyRate * 1.5);
+                grossPay = regularPay + overtimePay;
+            }
+            Console.WriteLine("Are you (S)ingle, (M)arried, (D)ivorced, or (W)idowed?");
+            maritalStatus = Console.ReadLine();
+            if (maritalStatus == "S")
+            {
+                netPay = grossPay * (1 - singleRate);
+            }
+            else if (maritalStatus == "M")
+            {
+                netPay = grossPay * (1 - marriedRate);
+            }
+            else if (maritalStatus == "D")
+            {
+                netPay = grossPay * (1 - divorcedRate);
+            }
+            else if (maritalStatus == "W")
+            {
+                netPay = grossPay * (1 - widowedRate);
+            }
+
+            Console.WriteLine("The hourly rate you entered was " + hourlyRate + ".");
+            Console.WriteLine("The amount of hours you worked was " + hoursWorked + ".");
+            Console.WriteLine("You entered " + maritalStatus + " as your marital status.");
+            Console.WriteLine("Your regular pay was " + regularPay + ".");
+            if (overtimePay > 0)
+            {
+                Console.WriteLine("Your overtime pay is " + overtimePay + ".");
+            }
+            Console.WriteLine("Your gross pay is " + grossPay + ".");
+            Console.WriteLine("Your net pay is " + netPay + ".");
+            Console.ReadLine();
+            Console.WriteLine("Would you like to do this calculation again? (Y/N)");
+            if (Console.ReadLine() == "Y")
+            {
+                goto Label1;
+            }
+            Console.WriteLine("The program will terminate.");
+            Console.ReadLine();
+           
+        }
